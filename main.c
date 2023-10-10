@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <mpi.h>
+#include "strategies.h"
 
 int main(int argc, char **argv) {
     int menum, nproc, strategy;
@@ -13,7 +14,7 @@ int main(int argc, char **argv) {
 
     if (argc < 3) {
         if (menum == 0) {
-            printf("Usage: %s <strategy> <N> [numbers ...]\n", argv[0]);
+            printf("Utilizzo: %s [strategia: 1, 2, 3] <N> [numeri ...]\n", argv[0]);
         }
         MPI_Finalize();
         return 1;
@@ -33,7 +34,7 @@ int main(int argc, char **argv) {
     if (N <= 20) {
         if (argc < 3 + N) {
             if (menum == 0) {
-                printf("Not enough numbers provided for N.\n");
+                printf("Non hai inserito abbastanza numeri.\n");
             }
             MPI_Finalize();
             return 1;
@@ -70,10 +71,17 @@ int main(int argc, char **argv) {
         local_sum += local_numbers[i];
     }
 
-    MPI_Reduce(&local_sum, &global_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+    if (strategy == 1)
+        global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
+    else if (strategy == 2)
+        //global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
+        exit(1);
+    else if (strategy == 3)
+        //global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
+        exit(1);
 
     if (menum == 0) {
-        printf("Sum of the numbers: %lf\n", global_sum);
+        printf("Somma totale: %lf\n", global_sum);
     }
 
     MPI_Finalize();
