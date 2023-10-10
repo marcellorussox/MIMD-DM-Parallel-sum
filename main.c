@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
 
     if (N < 0) {
         if (menum == 0) {
-            printf("N must be a positive integer.\n");
+            printf("N deve essere un numero positivo intero.\n");
         }
         MPI_Finalize();
         return 1;
@@ -48,7 +48,6 @@ int main(int argc, char **argv) {
         }
     } else {
         if (menum == 0) {
-            // Generate N random numbers between 0 and 1
             srand(time(NULL));
             numbers = (double *)malloc(N * sizeof(double));
             for (int i = 0; i < N; i++) {
@@ -72,7 +71,7 @@ int main(int argc, char **argv) {
     }
 
     if (strategy == 1)
-        global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
+        first_strategy(menum, nproc, local_numbers, local_sum, &global_sum);
     else if (strategy == 2)
         //global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
         exit(1);
