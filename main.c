@@ -3,6 +3,7 @@
 #include <time.h>
 #include <mpi.h>
 #include "strategies.h"
+#include "my_math.h"
 
 int main(int argc, char **argv) {
     int menum, nproc, strategy;
@@ -70,18 +71,26 @@ int main(int argc, char **argv) {
         local_sum += local_numbers[i];
     }
 
+    double log_nproc = log_2(nproc);
+
+    if (log_nproc != (int)log_nproc) {
+        if (menum == 0) {
+            printf("Il numero di processi non è una potenza di due. Sarà utilizzata la prima strategia.\n");
+        }
+        strategy = 1;
+    }
+
     if (strategy == 1)
-        first_strategy(menum, nproc, local_numbers, local_sum, &global_sum);
+        first_strategy(menum, nproc, local_sum, &global_sum);
     else if (strategy == 2)
-        //global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
-        exit(1);
+        second_strategy(menum, nproc, local_sum, &global_sum);
     else if (strategy == 3)
-        //global_sum = first_strategy(menum, nproc, local_numbers, local_sum);
-        exit(1);
+        third_strategy(menum, nproc, local_sum, &global_sum);
 
     if (menum == 0) {
         printf("Somma totale: %lf\n", global_sum);
     }
+    printf("%d", menum);
 
     MPI_Finalize();
     if (menum == 0) {
