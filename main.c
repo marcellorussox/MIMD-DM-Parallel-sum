@@ -90,7 +90,6 @@ int main(int argc, char **argv) {
     if (menum == 0) {
         printf("Somma totale: %lf\n", global_sum);
     }
-    printf("%d", menum);
 
     MPI_Finalize();
     if (menum == 0) {
