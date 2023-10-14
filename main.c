@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <mpi.h>
 #include "strategies.h"
-#include "my_math.h"
 
 int main(int argc, char **argv) {
     int menum, nproc, strategy;
@@ -88,9 +88,9 @@ int main(int argc, char **argv) {
         local_sum += local_numbers[i];
     }
 
-    double log_nproc = log_2(nproc);
+    double log2_nproc = log2(nproc);
 
-    if (log_nproc != (int)log_nproc) {
+    if (log2_nproc != (int)log2_nproc) {
         if (menum == 0) {
             printf("Il numero di processi non è una potenza di due. Sarà utilizzata la prima strategia.\n");
         }

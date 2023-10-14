@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <mpi.h>
-#include "my_math.h"
 
 void first_strategy(int menum, int nproc, double local_sum, double *global_sum) {
 
@@ -21,14 +19,12 @@ void first_strategy(int menum, int nproc, double local_sum, double *global_sum) 
 }
 
 
-void second_strategy(int menum, int nproc, double local_sum, double *global_sum) {
+void second_strategy(int menum, int nproc, double local_sum, double *global_sum, double  log2_nproc) {
 
     int i;
     double recv_sum;
 
-    int log_nproc = (int)(log_2(nproc)); // Calcola il logaritmo in base 2 di nproc
-
-    for (i = 0; i < log_nproc; i++) {
+    for (i = 0; i < log2_nproc; i++) {
         int tag = 20 + i;
         if ((menum % (1 << i)) == 0) {
             if ((menum % (1 << (i + 1))) == 0) {
@@ -55,14 +51,12 @@ void second_strategy(int menum, int nproc, double local_sum, double *global_sum)
 
 
 
-void third_strategy(int menum, int nproc, double local_sum, double *global_sum) {
+void third_strategy(int menum, int nproc, double local_sum, double *global_sum, double  log2_nproc) {
 
     int i;
     double recv_sum;
 
-    int log_nproc = (int)(log_2(nproc)); // Calcola il logaritmo in base 2 di nproc
-
-    for (i = 0; i < log_nproc; i++) {
+    for (i = 0; i < log2_nproc; i++) {
         int tag = 20 + i;
         if ((menum % (1 << i)) == 0) {
             if ((menum % (1 << (i + 1))) == 0) {
