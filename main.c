@@ -100,9 +100,9 @@ int main(int argc, char **argv) {
     if (strategy == 1)
         first_strategy(menum, nproc, local_sum, &global_sum);
     else if (strategy == 2)
-        second_strategy(menum, nproc, local_sum, &global_sum);
+        second_strategy(menum, nproc, local_sum, &global_sum, log2_nproc);
     else if (strategy == 3)
-        third_strategy(menum, nproc, local_sum, &global_sum);
+        third_strategy(menum, nproc, local_sum, &global_sum, log2_nproc);
 
     if (menum == 0) {
         printf("Somma totale: %lf\n", global_sum);
