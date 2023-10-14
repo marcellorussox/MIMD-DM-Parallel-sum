@@ -65,7 +65,24 @@ int main(int argc, char **argv) {
     nloc = (menum < rest) ? (nloc + 1) : nloc;
     double *local_numbers = (double *)malloc(nloc * sizeof(double));
 
-    MPI_Scatter(numbers, nloc, MPI_DOUBLE, local_numbers, nloc, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    if (menum == 0) {
+
+        int offset = 0;
+        for (int dest = 1; dest < nproc; dest++) {
+            int tag = dest;
+            int dest_count = N / nproc;
+            dest_count = (dest < rest) ? (dest_count + 1) : dest_count;
+            offset += dest_count;
+            MPI_Send(&numbers[offset], dest_count, MPI_DOUBLE, dest, 0, MPI_COMM_WORLD);
+        }
+
+        for (int i = 0; i < nloc; i++) {
+            local_numbers[i] = numbers[i];
+        }
+    } else {
+        int tag = menum;
+        MPI_Recv(local_numbers, nloc, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    }
 
     for (int i = 0; i < nloc; i++) {
         local_sum += local_numbers[i];
