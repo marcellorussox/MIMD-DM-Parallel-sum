@@ -4,10 +4,17 @@
 #include <math.h>
 #include <mpi.h>
 #include "strategies.h"
+#include "analytics.h"
+
+#define CSV_OUTPUT "output/analytics_data.csv" 
 
 int main(int argc, char **argv) {
     int menum, nproc, strategy;
     double *numbers, local_sum = 0.0, global_sum = 0.0;
+
+    double t0, t1, dt; 
+    double timetot;
+
 
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &menum);
@@ -84,6 +91,9 @@ int main(int argc, char **argv) {
         MPI_Recv(local_numbers, nloc, MPI_DOUBLE, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     }
 
+    MPI_Barrier(MPI_COMM_WORLD);
+    t0=MPI_Wtime();
+
     for (int i = 0; i < nloc; i++) {
         local_sum += local_numbers[i];
     }
@@ -104,8 +114,19 @@ int main(int argc, char **argv) {
     else if (strategy == 3)
         third_strategy(menum, nproc, local_sum, &global_sum, log2_nproc);
 
+    t1=MPI_Wtime();
+    dt=t1-t0;
+
+    //printf("Sono %d: Tempo impiegato: %lf secondi\n",menum,dt);
+    //MPI_Barrier(MPI_COMM_WORLD);
+
+    MPI_Reduce(&dt,&timetot,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+
+
     if (menum == 0) {
         printf("Somma totale: %lf\n", global_sum);
+        printf("Tempo totale impiegato: %lf secondi\n",timetot);
+        export_data_csv(CSV_OUTPUT, nproc, N, strategy,timetot);
     }
 
     MPI_Finalize();
@@ -113,6 +134,7 @@ int main(int argc, char **argv) {
         free(numbers);
     }
     free(local_numbers);
+
 
     return 0;
 }
