@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
             int dest_count = N / nproc;
             dest_count = (dest < rest) ? (dest_count + 1) : dest_count;
             offset += dest_count;
-            MPI_Send(&numbers[offset], dest_count, MPI_DOUBLE, dest, 0, MPI_COMM_WORLD);
+            MPI_Send(&numbers[offset], dest_count, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
         }
 
         for (int i = 0; i < nloc; i++) {
@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
         }
     } else {
         int tag = menum;
-        MPI_Recv(local_numbers, nloc, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        MPI_Recv(local_numbers, nloc, MPI_DOUBLE, 0, tag, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
     }
 
     for (int i = 0; i < nloc; i++) {
