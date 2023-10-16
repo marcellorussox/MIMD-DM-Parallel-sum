@@ -9,7 +9,8 @@ add_executable(pdc1
         main.c
         strategies.c
         strategies.h
-        analytics.c)
+        analytics.c
+        analytics.h)
 
 set(CMAKE_C_COMPILER mpicc)
 
