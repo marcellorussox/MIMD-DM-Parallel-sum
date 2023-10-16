@@ -125,8 +125,8 @@ int main(int argc, char **argv) {
 
     if (menum == 0) {
         printf("Somma totale: %lf\n", global_sum);
-        printf("Tempo totale impiegato: %lf secondi\n",timetot);
-        export_data_csv(CSV_OUTPUT, nproc, N, strategy,timetot);
+        printf("Tempo totale impiegato: %lf secondi\n", timetot);
+        export_data_csv(CSV_OUTPUT, nproc, N, strategy, timetot);
     }
 
     MPI_Finalize();

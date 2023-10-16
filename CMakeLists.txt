@@ -8,7 +8,8 @@ include_directories(.)
 add_executable(pdc1
         main.c
         strategies.c
-        strategies.h)
+        strategies.h
+        analytics.c)
 
 set(CMAKE_C_COMPILER mpicc)
 
