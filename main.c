@@ -11,6 +11,7 @@
 int main(int argc, char **argv) {
     int menum, nproc, strategy;
     double *numbers, local_sum = 0.0, global_sum = 0.0;
+    int i;
 
     double t0, t1, dt; 
     double timetot;
@@ -50,7 +51,7 @@ int main(int argc, char **argv) {
 
         if (menum == 0) {
             numbers = (double *)malloc(N * sizeof(double));
-            for (int i = 0; i < N; i++) {
+            for (i = 0; i < N; i++) {
                 numbers[i] = atof(argv[3 + i]);
             }
         }
@@ -58,7 +59,7 @@ int main(int argc, char **argv) {
         if (menum == 0) {
             srand(time(NULL));
             numbers = (double *)malloc(N * sizeof(double));
-            for (int i = 0; i < N; i++) {
+            for (i = 0; i < N; i++) {
                 numbers[i] = ((double)rand() / RAND_MAX);
                 numbers[i] = 1;
             }
@@ -75,7 +76,8 @@ int main(int argc, char **argv) {
     if (menum == 0) {
 
         int offset = 0;
-        for (int dest = 1; dest < nproc; dest++) {
+        int dest;
+        for (dest = 1; dest < nproc; dest++) {
             int tag = dest;
             int dest_count = N / nproc;
             dest_count = (dest < rest) ? (dest_count + 1) : dest_count;
@@ -83,7 +85,7 @@ int main(int argc, char **argv) {
             MPI_Send(&numbers[offset], dest_count, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
         }
 
-        for (int i = 0; i < nloc; i++) {
+        for (i = 0; i < nloc; i++) {
             local_numbers[i] = numbers[i];
         }
     } else {
@@ -94,11 +96,11 @@ int main(int argc, char **argv) {
     MPI_Barrier(MPI_COMM_WORLD);
     t0=MPI_Wtime();
 
-    for (int i = 0; i < nloc; i++) {
+    for (i = 0; i < nloc; i++) {
         local_sum += local_numbers[i];
     }
 
-    double log2_nproc = log2(nproc);
+    double log2_nproc = log(nproc) / log(2);
 
     if (log2_nproc != (int)log2_nproc) {
         if (menum == 0) {
