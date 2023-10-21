@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Inserisci il percorso del tuo file CSV
-csv_path = 'output.csv'
+csv_path = 'output_sorted.csv'
 
 # Carica il CSV in un DataFrame
 df = pd.read_csv(csv_path)

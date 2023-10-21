@@ -17,5 +17,5 @@ def riduzione_media_csv(file_path):
 
 if __name__ == "__main__":
     # Passa il percorso del file CSV come argomento
-    file_path = input("Inserisci il percorso del file CSV: ")
-    riduzione_media_csv(file_path)
+    # file_path = input("Inserisci il percorso del file CSV: ")
+    riduzione_media_csv('output_sorted.csv')
