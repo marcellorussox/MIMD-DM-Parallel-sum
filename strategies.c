@@ -48,6 +48,7 @@ void second_strategy(int menum, int nproc, double local_sum, double *global_sum,
     if (menum == 0) {
         *global_sum = local_sum;
     }
+
 }
 
 
