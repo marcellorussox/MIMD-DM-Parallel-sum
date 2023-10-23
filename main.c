@@ -61,7 +61,6 @@ int main(int argc, char **argv) {
             numbers = (double *)malloc(N * sizeof(double));
             for (i = 0; i < N; i++) {
                 numbers[i] = ((double)rand() / RAND_MAX);
-                numbers[i] = 1;
             }
         }
     }
@@ -118,9 +117,6 @@ int main(int argc, char **argv) {
 
     t1=MPI_Wtime();
     dt=t1-t0;
-
-    //printf("Sono %d: Tempo impiegato: %lf secondi\n",menum,dt);
-    //MPI_Barrier(MPI_COMM_WORLD);
 
     MPI_Reduce(&dt,&timetot,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 
