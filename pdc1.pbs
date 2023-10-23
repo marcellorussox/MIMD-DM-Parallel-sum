@@ -2,12 +2,12 @@
 
 #PBS -q studenti
 #PBS -N pdc1
-#PBS -l nodes=8:ppn=8
+#PBS -l nodes=8:ppn=4
 #PBS -o pdc1.out
 #PBS -e pdc1.err
 
-NCPU=8
+NCPU=$(wc -l < $PBS_NODEFILE)
 
 /usr/lib64/openmpi/1.4-gcc/bin/mpicc -o pdc1 analytics.c strategies.c main.c
 
-/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU pdc1 2 100000000
+/usr/lib64/openmpi/1.4-gcc/bin/mpiexec -machinefile $PBS_NODEFILE -np $NCPU pdc1 1 200000000
