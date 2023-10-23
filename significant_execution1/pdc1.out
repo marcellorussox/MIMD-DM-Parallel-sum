@@ -1,0 +1,13 @@
+Il numero di processi non è una potenza di due. Sarà utilizzata la prima strategia.
+Sono 1 e spedisco a 0, local_sum: 7.000000
+Sono 2 e spedisco a 0, local_sum: 11.000000
+Sono 3 e spedisco a 0, local_sum: 15.000000
+Sono 4 e spedisco a 0, local_sum: 19.000000
+Sono 0 e ricevo da 1, local_sum: 10.000000, recv_sum: 7.000000
+Sono 0 e ricevo da 2, local_sum: 21.000000, recv_sum: 11.000000
+Sono 0 e ricevo da 3, local_sum: 36.000000, recv_sum: 15.000000
+Sono 0 e ricevo da 4, local_sum: 55.000000, recv_sum: 19.000000
+Sono 0 e ricevo da 5, local_sum: 78.000000, recv_sum: 23.000000
+Sono 5 e spedisco a 0, local_sum: 23.000000
+Somma totale: 78.000000
+Tempo totale impiegato: 0.000318 secondi

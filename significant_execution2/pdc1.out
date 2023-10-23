@@ -1,0 +1,32 @@
+Sono 7 e spedisco a 6, local_sum: 63.000000
+Sono 0 e ricevo da 1, local_sum: 126.000000, recv_sum: 63.000000
+Sono 0 e ricevo da 2, local_sum: 252.000000, recv_sum: 126.000000
+Sono 0 e ricevo da 4, local_sum: 504.000000, recv_sum: 252.000000
+Sono 1 e spedisco a 0, local_sum: 63.000000
+Sono 2 e ricevo da 3, local_sum: 126.000000, recv_sum: 63.000000
+Sono 2 e spedisco a 0, local_sum: 126.000000
+Sono 3 e spedisco a 2, local_sum: 63.000000
+Sono 4 e ricevo da 5, local_sum: 126.000000, recv_sum: 63.000000
+Sono 4 e ricevo da 6, local_sum: 252.000000, recv_sum: 126.000000
+Sono 4 e spedisco a 0, local_sum: 252.000000
+Sono 5 e spedisco a 4, local_sum: 63.000000
+Sono 6 e ricevo da 7, local_sum: 126.000000, recv_sum: 63.000000
+Sono 6 e spedisco a 4, local_sum: 126.000000
+Sono 13 e spedisco a 12, local_sum: 62.000000
+Sono 8 e ricevo da 9, local_sum: 124.000000, recv_sum: 62.000000
+Sono 0 e ricevo da 8, local_sum: 1000.000000, recv_sum: 496.000000
+Sono 12 e ricevo da 13, local_sum: 124.000000, recv_sum: 62.000000
+Sono 12 e ricevo da 14, local_sum: 248.000000, recv_sum: 124.000000
+Sono 12 e spedisco a 8, local_sum: 248.000000
+Somma totale: 1000.000000
+Tempo totale impiegato: 0.000494 secondi
+Sono 14 e ricevo da 15, local_sum: 124.000000, recv_sum: 62.000000
+Sono 14 e spedisco a 12, local_sum: 124.000000
+Sono 15 e spedisco a 14, local_sum: 62.000000
+Sono 9 e spedisco a 8, local_sum: 62.000000
+Sono 11 e spedisco a 10, local_sum: 62.000000
+Sono 10 e ricevo da 11, local_sum: 124.000000, recv_sum: 62.000000
+Sono 8 e ricevo da 10, local_sum: 248.000000, recv_sum: 124.000000
+Sono 8 e ricevo da 12, local_sum: 496.000000, recv_sum: 248.000000
+Sono 10 e spedisco a 8, local_sum: 124.000000
+Sono 8 e spedisco a 0, local_sum: 496.000000
