@@ -76,11 +76,12 @@ int main(int argc, char **argv) {
 
         int offset = 0;
         int dest;
+        int dest_count = nloc;
+
         for (dest = 1; dest < nproc; dest++) {
-            int tag = dest;
-            int dest_count = N / nproc;
-            dest_count = (dest < rest) ? (dest_count + 1) : dest_count;
             offset += dest_count;
+            int tag = dest;
+            dest_count = (dest == rest) ? (dest_count - 1) : dest_count;
             MPI_Send(&numbers[offset], dest_count, MPI_DOUBLE, dest, tag, MPI_COMM_WORLD);
         }
 
